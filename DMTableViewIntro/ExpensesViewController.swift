@@ -10,11 +10,23 @@ import UIKit
 /**
  1. Create the user interface. See the provided screenshot for how the UI should look. Feel free to customize the colors, font, etc.
  */
-class ExpensesViewController: UIViewController {
+class ExpensesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
     
     /**
      2 Connect the UITableView to the code.
      */
+    @IBOutlet weak var expensesTableView: UITableView!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return expenses.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath)
+        cell.textLabel?.text = expenses[indexPath.row]
+        return cell
+    }
     
     /**
      You will be displaying these expenses in the UITableView. You do not need to modify this code.
@@ -27,6 +39,8 @@ class ExpensesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureTableView()
+        
     }
     
     /**
@@ -34,5 +48,9 @@ class ExpensesViewController: UIViewController {
     */
     func configureTableView() {
         
+        expensesTableView.dataSource = self
+        expensesTableView.delegate = self
+        
     }
+
 }
