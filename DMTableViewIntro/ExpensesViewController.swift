@@ -26,6 +26,7 @@ class ExpensesViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath)
         cell.textLabel?.text = expenses[indexPath.row]
         return cell
+        
     }
     
     /**
